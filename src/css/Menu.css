@@ -9,13 +9,14 @@
 }
 
 .main-menu li {
-	height: 2.5em;
+	height: 3em;
 }
 
-.main-menu button {
-	font-size: 1.2em;
+.main-menu .btn-wrapper {
 	width: 100%;
-	height: 100%;
+}
+
+.main-menu .btn-wrapper .btn {
 	text-align: left;
 }
 

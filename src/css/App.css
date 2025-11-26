@@ -53,23 +53,68 @@ li {
 	height: 100%;
 }
 
-select {
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	background-image: none;
-}
-
-.btn,
-.select {
+/* Input */
+.input-wrapper input {
+	background-color: transparent;
+	border: 1px solid var(--primary-color-10);
+	height: 100%;
+	width: 100%;
+	font-size: 1.2em;
 	padding: 0.5em;
 	box-sizing: border-box;
+	color: var(--primary-color-100);
+	border-radius: 0.3em;
+}
+
+/* Bouton */
+.btn-wrapper .btn {
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 1.2em;
+	border-radius: 0.3em;
+	cursor: pointer;
 	border: none;
 	background-color: transparent;
 	color: var(--primary-color-100);
+}
+
+/* Select */
+.select-wrapper select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	height: 100%;
+	width: 100%;
+	border: none;
+	background-color: transparent;
 	font-size: 1.2em;
-	cursor: pointer;
+	padding: 0.5em 2em 0.5em 0.5em;
+	box-sizing: border-box;
+	color: var(--primary-color-100);
 	border-radius: 0.3em;
+	cursor: pointer;
+}
+
+/* Chevrons FontAwesome */
+.select-wrapper .select-icon {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 0.8em;
+}
+
+.btn-wrapper .btn {
+	height: 100%;
+}
+
+/* Focus */
+.input-wrapper input:focus,
+.select-wrapper select:focus {
+	outline: none;
+	border-color: var(--primary-color-10);
 }
 
 .btn.filled,
