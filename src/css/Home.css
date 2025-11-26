@@ -1,0 +1,70 @@
+.home {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-left: 1.5em;
+	box-sizing: border-box;
+}
+
+.home-header {
+	display: flex;
+	flex-direction: row;
+	height: 2.5em;
+	width: 100%;
+	gap: 1em;
+	align-items: center;
+}
+
+
+
+.input-wrapper {
+	flex: 1;
+}
+
+/* Input */
+.input-wrapper input {
+	background-color: transparent;
+	border: 1px solid var(--primary-color-10);
+	height: 100%;
+	width: 100%;
+	font-size: 1.2em;
+	padding: 0.5em;
+	box-sizing: border-box;
+	color: var(--primary-color-100);
+	border-radius: 0.3em;
+}
+
+/* Select */
+.select-wrapper select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	height: 100%;
+	width: 100%;
+	background-color: transparent;
+	font-size: 1.2em;
+	padding: 0.5em 2em 0.5em 0.5em;
+	/* espace pour le chevron */
+	box-sizing: border-box;
+	color: var(--primary-color-100);
+	border-radius: 0.3em;
+}
+
+/* Chevrons FontAwesome */
+.select-wrapper .select-icon {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 0.8em;
+}
+
+/* Focus */
+.input-wrapper input:focus,
+.select-wrapper select:focus {
+	border: none;
+	outline: none;
+	border-color: var(--primary-color-80);
+}
