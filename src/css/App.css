@@ -1,5 +1,7 @@
 :root {
 	--primary-color-100: #3C424B;
+	--primary-color-30: #3c424b5d;
+	--primary-color-20: #3c424b44;
 	--primary-color-10: #3c424b21;
 	padding: 0;
 	margin: 0;
@@ -56,6 +58,13 @@ a {
 	position: relative;
 	display: inline-block;
 	height: 100%;
+}
+
+.inlineGroup-wrapper {
+	display: flex;
+	height: 100%;
+	gap: 1em;
+	justify-content: center;
 }
 
 /* Input */
@@ -125,6 +134,10 @@ a {
 .btn.filled,
 .select.filled {
 	background-color: var(--primary-color-10);
+}
+
+.btn:hover {
+	background-color: var(--primary-color-30);
 }
 
 .hidden {

@@ -15,7 +15,3 @@
 	gap: 0.5em;
 	height: 100%;
 }
-
-.header .actions .btn:hover {
-	transform: scale(1.1);
-}

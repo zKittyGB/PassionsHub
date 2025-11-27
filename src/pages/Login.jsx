@@ -1,10 +1,10 @@
-import "../css/Login.css";
+import "../css/Auth.css";
 
 function Login() {
 
 	return (
 		<>
-			<div className="main-login">
+			<div className="main-auth">
 				<form id="login-form" action="">
 					<h2>Formulaire de connexion</h2>
 					<div className="input-wrapper">
