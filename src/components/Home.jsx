@@ -1,9 +1,8 @@
 import { useState } from "react";
-import "../css/Home.css"
+import "../css/Home.css";
 import passionsData from "../data/passions.json";
 import usersData from "../data/users.json";
 import HomeContent from "./home/HomeContent.jsx";
-
 
 function Home() {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -73,4 +72,4 @@ function Home() {
 	);
 }
 
-export default Home
+export default Home;

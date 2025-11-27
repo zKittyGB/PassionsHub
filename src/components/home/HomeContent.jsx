@@ -1,4 +1,4 @@
-import "../../css/HomeContent.css"
+import "../../css/HomeContent.css";
 
 function Cards(props) {
 	return (
@@ -21,14 +21,16 @@ function Cards(props) {
 
 function HomeContent(props) {
 	return (
-		<>
-			<div className="home-content">
-				{props.passions.map((passion) => (
+		<div className="home-content">
+			{Array.isArray(props.passions) && props.passions.length > 0 ? (
+				props.passions.map((passion) => (
 					<Cards key={passion.id} passion={passion} />
-				))}
-			</div>
-		</>
-	)
+				))
+			) : (
+				<p>Aucune passion à afficher</p>
+			)}
+		</div>
+	);
 }
 
-export default HomeContent
+export default HomeContent;

@@ -1,19 +1,19 @@
-import "../css/Header.css"
-function button() {}
+import { Link } from "react-router-dom";
+import "../css/Header.css";
 
 function Header() {
 
 	return (
 		<>
 			<div className="header">
-				<h1>Communauté de Loisirs & Passions</h1>
+				<Link to="/"><h1>Communauté de Loisirs & Passions</h1></Link>
 				<div className="actions">
-					<div className="btn-wrapper"><button className="btn" onClick={button}>Connexion</button></div>
-					<div className="btn-wrapper"><button className="btn filled" onClick={button}>Inscription</button></div>
+					<Link to="/login"><div className="btn-wrapper"><button className="btn">Connexion</button></div></Link>
+					<Link to="/signup"><div className="btn-wrapper"><button className="btn filled">Inscription</button></div></Link>
 				</div>
 			</div>
 		</>
 	)
 }
 
-export default Header
+export default Header;

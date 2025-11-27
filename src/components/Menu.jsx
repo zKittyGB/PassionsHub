@@ -1,4 +1,4 @@
-import "../css/Menu.css"
+import "../css/Menu.css";
 
 function Menu() {
 
@@ -16,4 +16,4 @@ function Menu() {
 	)
 }
 
-export default Menu
+export default Menu;

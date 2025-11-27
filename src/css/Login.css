@@ -1,0 +1,31 @@
+.main-login {
+	width: 100%;
+	min-height: calc(100vh - 14em); /* Header height 6em + 2*#body padding = 4em, so 6em + 2*4em = 14em */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5em;
+	box-sizing: border-box;
+}
+
+#login-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 400px;
+	max-height: 20em;
+	gap: 2em;
+	margin: 0 auto;
+	border: 1px solid var(--primary-color-10);
+	border-radius: 1em;
+	padding: 2em;
+	box-sizing: border-box;
+}
+
+#login-form .input-wrapper,
+#login-form .btn-wrapper {
+	height: 3em;
+}
