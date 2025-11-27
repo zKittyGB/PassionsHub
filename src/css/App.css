@@ -121,3 +121,7 @@ li {
 .select.filled {
 	background-color: var(--primary-color-10);
 }
+
+.hidden {
+	display: none;
+}

@@ -1,12 +1,10 @@
 import "../../css/HomeContent.css"
 
 function Cards(props) {
-	console.log(props)
 	return (
-		<div key={props.passion.id} className="card" data-category={props.passion.category} data-tags={props.passion.tags.join(",")}
->
+		<div className={`card ${props.passion.hidden ? "hidden" : ""}`}>
 			<div className="card-header">
-				<img src={"../../../public/pictures/" + props.passion.cover_picture} alt={props.passion.title} />
+				<img src={"../../pictures/" + props.passion.cover_picture} alt={props.passion.title} />
 			</div>
 			<div className="card-content">
 				<h2>{props.passion.title}</h2>
@@ -18,15 +16,15 @@ function Cards(props) {
 				<p>par {props.passion.author.username}</p>
 			</div>
 		</div>
-	)
+	);
 }
 
 function HomeContent(props) {
 	return (
 		<>
 			<div className="home-content">
-				{props.passions.map((passion, index) => (
-					<Cards key={index} passion={passion} />
+				{props.passions.map((passion) => (
+					<Cards key={passion.id} passion={passion} />
 				))}
 			</div>
 		</>
