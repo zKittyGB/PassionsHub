@@ -6,7 +6,6 @@ import Signup from "./pages/Signup.jsx";
 import "./css/App.css";
 
 function App() {
-
 	return (
 		<BrowserRouter>
 			<Header />

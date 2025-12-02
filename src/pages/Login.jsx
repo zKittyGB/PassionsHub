@@ -1,10 +1,9 @@
 import { useState } from "react";
 import "../css/Auth.css";
-import { useNavigate } from "react-router-dom"; // si tu utilises react-router pour la redirection
+import { useNavigate } from "react-router-dom";
+import useUser from "../context/useUser.js";
 
 function Login() {
-	const navigate = useNavigate();
-
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState({
@@ -12,6 +11,9 @@ function Login() {
 		password: []
 	});
 	const [generalError, setGeneralError] = useState("");
+	const { setUser } = useUser();
+	
+	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -47,8 +49,8 @@ function Login() {
 					// Stocker le token et l'ID de l'utilisateur dans localStorage
 					localStorage.setItem("sessionToken", data.token);
 					localStorage.setItem("user", JSON.stringify(data.user));
+					setUser(data.user);
 					navigate("/"); // redirection
-
 				} else {
 					if (data.errors.general) {
 						setGeneralError(data.errors.general[0]);
