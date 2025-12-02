@@ -1,6 +1,7 @@
 .main-auth {
 	width: 100%;
-	min-height: calc(100vh - 14em); /* Header height 6em + 2*#body padding = 4em, so 6em + 2*4em = 14em */
+	min-height: calc(100vh - 14em);
+	/* Header height 6em + 2*#body padding = 4em, so 6em + 2*4em = 14em */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -35,9 +36,38 @@
 	width: 100%;
 }
 
-#login-form .input-wrapper,
+#login-form .input-wrapper:not(:has(ul)),
 #login-form .btn-wrapper,
-#signup-form .input-wrapper,
+#signup-form .input-wrapper:not(:has(ul)),
 #signup-form .btn-wrapper {
 	height: 3em;
+}
+
+.error-item {
+	color: var(--error-color);
+}
+
+.general-message {
+	width: 100%;
+	border-radius: 0.5em;
+	padding: 1em;
+	box-sizing: border-box;
+	border-radius: 0.3em;
+	margin-bottom: 1em;
+	text-align: center;
+	font-weight: 500;
+}
+
+/* Message type error */
+.general-message.error {
+	background-color: #ffe5e5;
+	color: var(--error-color);
+	border: 1px solid var(--error-color);
+}
+
+/* Message type success */
+.general-message.success {
+	background-color: #e5ffe5;
+	color: var(--success-color);
+	border: 1px solid var(--success-color);
 }

@@ -3,6 +3,8 @@
 	--primary-color-30: #3c424b5d;
 	--primary-color-20: #3c424b44;
 	--primary-color-10: #3c424b21;
+	--error-color: #ff0000;
+	--success-color: #2e7d32;
 	padding: 0;
 	margin: 0;
 	font-size: 15px;
@@ -129,6 +131,16 @@ a {
 .select-wrapper select:focus {
 	outline: none;
 	border-color: var(--primary-color-10);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+	-webkit-text-fill-color: var(--primary-color-100) !important;
+	background-clip: padding-box !important;
+
 }
 
 .btn.filled,
