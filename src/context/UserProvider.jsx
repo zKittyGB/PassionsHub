@@ -9,17 +9,18 @@ export default function UserProvider({ children }) {
 		const checkUser = async () => {
 			const savedUser = localStorage.getItem("user");
 			const savedToken = localStorage.getItem("sessionToken");
-
+			console.log("pat")
 			if (savedUser && savedToken) {
 				const userObj = JSON.parse(savedUser);
-
+				console.log("p"+userObj.ID);
+			
 				try {
 					const res = await fetch(
 						"https://zkittygb.fr/projects/passionsHub/backend/validateToken.php",
 						{
 							method: "POST",
 							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({ userID: userObj.phID, token: savedToken }),
+							body: JSON.stringify({ userID: userObj.ID, token: savedToken }),
 						}
 					);
 					const data = await res.json();

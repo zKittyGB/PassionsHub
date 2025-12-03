@@ -3,10 +3,12 @@ import "../css/Home.css";
 import passionsData from "../data/passions.json";
 import usersData from "../data/users.json";
 import HomeContent from "./home/HomeContent.jsx";
+import useUser from "../context/useUser.js";
 
 function Home() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState("");
+	const { user } = useUser();
 
 	const passionsWithAuthors = passionsData.map((passion) => {
 		const author = usersData.find((user) => user.id === passion.author_id);
@@ -60,9 +62,13 @@ function Home() {
 						<i className="fa-solid fa-chevron-down select-icon"></i>
 					</div>
 
-					<div className="btn-wrapper">
-						<button className="btn filled">En vedette</button>
-					</div>
+					{user && 
+						<>
+							<div className="btn-wrapper">
+								<button className="btn filled">Mes favoris</button>
+							</div>
+						</>
+					}
 
 				</div>
 

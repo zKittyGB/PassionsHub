@@ -8,6 +8,7 @@ function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [picture, setPicture] = useState("");
 	const [generalMessage, setGeneralMessage] = useState("");
 	const [generalMessageType, setGeneralMessageType] = useState(""); // "success" ou "error"
 
@@ -70,18 +71,21 @@ function Signup() {
 			return;
 		}
 
+		// Prepare form data
+		const formData = new FormData();
+		formData.append("name", name);
+		formData.append("username", username);
+		formData.append("email", email);
+		formData.append("password", password);
+
+		if (picture) {
+			formData.append("picture", picture);
+		}
+
 		// All validations succeeded
 		fetch("https://zkittygb.fr/projects/passionsHub/backend/signup.php", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				name,
-				username,
-				email,
-				password
-			})
+			body: formData,
 		})
 			.then(res => res.json())
 			.then(data => {
@@ -94,12 +98,14 @@ function Signup() {
 					setEmail("");
 					setPassword("");
 					setConfirmPassword("");
+					setPicture("");
 					setErrors({
 						name: [],
 						username: [],
 						email: [],
 						password: [],
-						confirmPassword: []
+						confirmPassword: [],
+						picture: []
 					});
 				} else {
 					if (data.errors.general) {
@@ -114,7 +120,8 @@ function Signup() {
 						username: data.errors.username || [],
 						email: data.errors.email || [],
 						password: data.errors.password || [],
-						confirmPassword: []
+						confirmPassword: [],
+						picture: data.errors.picture || []
 					});
 				}
 
@@ -133,19 +140,39 @@ function Signup() {
 
 	return (
 		<div className="main-auth">
-			<form id="signup-form">
+			<form id="signup-form" onSubmit={handleSubmit}>
 				<h2>Sign Up Form</h2>
 				{generalMessage && (
 					<div className={`general-message ${generalMessageType}`}>
 						{generalMessage}
 					</div>
 				)}
+
+				<div className="picture-wrapper">
+					<input 
+						type="file" 
+						id="picture" 
+						name="picture" 
+						accept="image/*"
+						onChange={(e) => {
+							setPicture(e.target.files[0]);
+							setErrors(prev => ({ ...prev, picture: [] }));
+						}}
+					/>
+					<label htmlFor="picture">
+						{!picture && <i className="fa-solid fa-camera"></i>}
+						{picture && <img src={URL.createObjectURL(picture)} alt="picture" className="profile-picture" />}
+					</label>
+					{renderErrors(errors.picture)}
+				</div>
+
 				<div className="inlineGroup-wrapper">
 
 					{/* Name field */}
 					<div className="input-wrapper">
 						<input
 							type="text"
+							name="name"
 							placeholder="Prénom"
 							value={name}
 							onChange={(e) => {
@@ -160,6 +187,7 @@ function Signup() {
 					<div className="input-wrapper">
 						<input
 							type="text"
+							name="username"
 							placeholder="Pseudo"
 							value={username}
 							onChange={(e) => {
@@ -176,6 +204,7 @@ function Signup() {
 					<div className="input-wrapper">
 						<input
 							type="text"
+							name="email"
 							placeholder="Email"
 							value={email}
 							onChange={(e) => {
@@ -193,6 +222,7 @@ function Signup() {
 					<div className="input-wrapper">
 						<input
 							type="password"
+							name="password"
 							placeholder="Mot de passe"
 							value={password}
 							onChange={(e) => {
@@ -207,6 +237,7 @@ function Signup() {
 					<div className="input-wrapper">
 						<input
 							type="password"
+							name="confirmPassword"
 							placeholder="Confirmer le mot de passe"
 							value={confirmPassword}
 							onChange={(e) => {
@@ -220,7 +251,7 @@ function Signup() {
 
 				{/* Submit button */}
 				<div className="btn-wrapper">
-					<button className="btn filled" onClick={handleSubmit}>
+					<button type="submit" className="btn filled">
 						S'enregistrer
 					</button>
 				</div>

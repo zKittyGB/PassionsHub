@@ -29,7 +29,8 @@ function Header() {
 				)}
 				{user && (
 					<>
-						<p>Bienvenue {user.phUsername} !</p>
+						<p>Bienvenue <strong>{user.username}</strong> !</p>
+						<img src={"https://www.zkittygb.fr/projects/passionsHub/public/pictures/profilePictures/"+(user.profilePicture)} alt="profile picture" className="profile-picture" />
 						<div className="btn-wrapper"><button className="btn filled" onClick={handleLogout}>déconnexion</button></div>
 					</>
 				)}

@@ -20,3 +20,9 @@
 .header .actions a { 
 	height: 100%;
 }
+
+.header .actions img {
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
