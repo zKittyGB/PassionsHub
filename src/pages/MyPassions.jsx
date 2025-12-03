@@ -1,17 +1,15 @@
 import "../css/Main.css";
 import Menu from "../components/Menu.jsx";
-import Home from "../components/Home.jsx";
 
-function Main() {
+function MyPassions() {
 
 	return (
 		<>
 			<div className="main">
-				<Menu selected="home" />
-				<Home />
+				<Menu selected="myPassions" />
 			</div>
 		</>
 	)
 }
 
-export default Main;
+export default MyPassions;
