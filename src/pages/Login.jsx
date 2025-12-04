@@ -3,18 +3,25 @@ import "../css/Auth.css";
 import { useNavigate } from "react-router-dom";
 import useUser from "../context/useUser.js";
 
+// Component for user login form
 function Login() {
+	// State for email input
 	const [email, setEmail] = useState("");
+	// State for password input
 	const [password, setPassword] = useState("");
+	// State for field-specific errors
 	const [errors, setErrors] = useState({
 		email: [],
 		password: []
 	});
+	// State for general error messages
 	const [generalError, setGeneralError] = useState("");
+	// Access user context setter
 	const { setUser } = useUser();
-	
+
 	const navigate = useNavigate();
 
+	// Handle form submission
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -32,29 +39,27 @@ function Login() {
 			return;
 		}
 
-		// Fetch login
+		// Send login request to backend
 		fetch("https://zkittygb.fr/projects/passionsHub/backend/login.php", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				email,
-				password
-			})
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ email, password })
 		})
 			.then(res => res.json())
 			.then(data => {
 				if (data.success) {
-					// Stocker le token et l'ID de l'utilisateur dans localStorage
+					// Store session token and user info in localStorage
 					localStorage.setItem("sessionToken", data.token);
 					localStorage.setItem("user", JSON.stringify(data.user));
 					setUser(data.user);
-					navigate("/"); // redirection
+					// Redirect to home page
+					navigate("/");
 				} else {
 					if (data.errors.general) {
+						// Display general backend error
 						setGeneralError(data.errors.general[0]);
 					} else {
+						// Display field-specific backend errors
 						setGeneralError("");
 						setErrors((prev) => ({
 							...prev,
@@ -65,6 +70,7 @@ function Login() {
 			})
 	};
 
+	// Render a list of errors for a given field
 	const renderErrors = (arr) =>
 		arr?.length > 0 && (
 			<ul className="error-list">
@@ -77,15 +83,17 @@ function Login() {
 	return (
 		<div className="main-auth">
 			<form id="login-form">
+				{/* Form title */}
 				<h2>Formulaire de connexion</h2>
 
-				{/* General error */}
+				{/* General error message */}
 				{generalError && (
 					<div className="general-message error">
 						{generalError}
 					</div>
 				)}
 
+				{/* Email input */}
 				<div className="input-wrapper">
 					<input
 						type="text"
@@ -96,6 +104,7 @@ function Login() {
 					{renderErrors(errors.email)}
 				</div>
 
+				{/* Password input */}
 				<div className="input-wrapper">
 					<input
 						type="password"
@@ -106,6 +115,7 @@ function Login() {
 					{renderErrors(errors.password)}
 				</div>
 
+				{/* Submit button */}
 				<div className="btn-wrapper">
 					<button className="btn filled" onClick={handleSubmit}>
 						Connexion

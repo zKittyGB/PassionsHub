@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "../css/Auth.css";
 
+// Component for user signup form
 function Signup() {
-	// --- Form fields states ---
+	// --- Form field states ---
 	const [name, setName] = useState("");
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ function Signup() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [picture, setPicture] = useState("");
 	const [generalMessage, setGeneralMessage] = useState("");
-	const [generalMessageType, setGeneralMessageType] = useState(""); // "success" ou "error"
+	const [generalMessageType, setGeneralMessageType] = useState(""); // "success" or "error"
 
 	// --- Errors stored as array per field ---
 	const [errors, setErrors] = useState({
@@ -18,9 +19,11 @@ function Signup() {
 		username: [],
 		email: [],
 		password: [],
-		confirmPassword: []
+		confirmPassword: [],
+		picture: []
 	});
 
+	// Handle form submission
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -30,26 +33,27 @@ function Signup() {
 			username: [],
 			email: [],
 			password: [],
-			confirmPassword: []
+			confirmPassword: [],
+			picture: []
 		};
 
 		// -----------------------------
 		// BASIC VALIDATIONS
 		// -----------------------------
 
-		// --- Required fields ---
+		// Required fields
 		if (!name.trim()) newErrors.name.push("Ce champ est obligatoire");
 		if (!username.trim()) newErrors.username.push("Ce champ est obligatoire");
 		if (!email.trim()) newErrors.email.push("Ce champ est obligatoire");
 		if (!password.trim()) newErrors.password.push("Ce champ est obligatoire");
 		if (!confirmPassword.trim()) newErrors.confirmPassword.push("Ce champ est obligatoire");
 
-		// --- Email format ---
+		// Email format validation
 		if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 			newErrors.email.push("Email invalide");
 		}
 
-		// --- Password validations ---
+		// Password validations
 		if (password) {
 			if (password.length < 8) newErrors.password.push("Le mot de passe doit contenir au moins 8 caractères");
 			if (!/[A-Z]/.test(password)) newErrors.password.push("Le mot de passe doit contenir une majuscule");
@@ -58,12 +62,12 @@ function Signup() {
 			if (!/[^A-Za-z0-9]/.test(password)) newErrors.password.push("Le mot de passe doit contenir un symbole");
 		}
 
-		// --- Password confirmation ---
+		// Password confirmation
 		if (password !== confirmPassword) {
 			newErrors.confirmPassword.push("Les mots de passe ne correspondent pas");
 		}
 
-		// Check if any field contains errors
+		// Check if there are any errors
 		const hasErrors = Object.values(newErrors).some((arr) => arr.length > 0);
 
 		if (hasErrors) {
@@ -71,7 +75,7 @@ function Signup() {
 			return;
 		}
 
-		// Prepare form data
+		// Prepare form data for submission
 		const formData = new FormData();
 		formData.append("name", name);
 		formData.append("username", username);
@@ -82,7 +86,7 @@ function Signup() {
 			formData.append("picture", picture);
 		}
 
-		// All validations succeeded
+		// Submit form data to backend
 		fetch("https://zkittygb.fr/projects/passionsHub/backend/signup.php", {
 			method: "POST",
 			body: formData,
@@ -90,9 +94,10 @@ function Signup() {
 			.then(res => res.json())
 			.then(data => {
 				if (data.success) {
-					setGeneralMessage("Inscription réussie !"); // set general success message
-					setGeneralMessageType("success"); // reset general error
-					// Optionally reset form fields
+					// Display success message
+					setGeneralMessage("Inscription réussie !");
+					setGeneralMessageType("success");
+					// Reset form fields
 					setName("");
 					setUsername("");
 					setEmail("");
@@ -108,13 +113,13 @@ function Signup() {
 						picture: []
 					});
 				} else {
+					// Display general or field-specific errors from backend
 					if (data.errors.general) {
-						setGeneralMessage(data.errors.general[0]); // set general error
-						setGeneralMessageType("error"); // set general error type
+						setGeneralMessage(data.errors.general[0]);
+						setGeneralMessageType("error");
 					} else {
-						setGeneralMessage(""); // reset if no general error
+						setGeneralMessage("");
 					}
-					// can't use "...prev" because backend doesn't return confirmPassword
 					setErrors({
 						name: data.errors.name || [],
 						username: data.errors.username || [],
@@ -124,11 +129,10 @@ function Signup() {
 						picture: data.errors.picture || []
 					});
 				}
-
 			});
 	};
 
-	// Utility for rendering errors
+	// Utility to render error lists
 	const renderErrors = (arr) =>
 		arr?.length > 0 && (
 			<ul className="error-list">
@@ -141,18 +145,22 @@ function Signup() {
 	return (
 		<div className="main-auth">
 			<form id="signup-form" onSubmit={handleSubmit}>
-				<h2>Sign Up Form</h2>
+				{/* Form title */}
+				<h2>Formulaire d'inscription</h2>
+
+				{/* General success or error message */}
 				{generalMessage && (
 					<div className={`general-message ${generalMessageType}`}>
 						{generalMessage}
 					</div>
 				)}
 
+				{/* Profile picture input */}
 				<div className="picture-wrapper">
-					<input 
-						type="file" 
-						id="picture" 
-						name="picture" 
+					<input
+						type="file"
+						id="picture"
+						name="picture"
 						accept="image/*"
 						onChange={(e) => {
 							setPicture(e.target.files[0]);
@@ -166,9 +174,8 @@ function Signup() {
 					{renderErrors(errors.picture)}
 				</div>
 
+				{/* Name and username inputs */}
 				<div className="inlineGroup-wrapper">
-
-					{/* Name field */}
 					<div className="input-wrapper">
 						<input
 							type="text"
@@ -183,7 +190,6 @@ function Signup() {
 						{renderErrors(errors.name)}
 					</div>
 
-					{/* Username field */}
 					<div className="input-wrapper">
 						<input
 							type="text"
@@ -199,7 +205,7 @@ function Signup() {
 					</div>
 				</div>
 
-				{/* Email field */}
+				{/* Email input */}
 				<div className="inlineGroup-wrapper">
 					<div className="input-wrapper">
 						<input
@@ -216,9 +222,8 @@ function Signup() {
 					</div>
 				</div>
 
+				{/* Password and confirm password inputs */}
 				<div className="inlineGroup-wrapper">
-
-					{/* Password field */}
 					<div className="input-wrapper">
 						<input
 							type="password"
@@ -233,7 +238,6 @@ function Signup() {
 						{renderErrors(errors.password)}
 					</div>
 
-					{/* Password confirmation field */}
 					<div className="input-wrapper">
 						<input
 							type="password"

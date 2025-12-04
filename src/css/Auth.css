@@ -80,14 +80,13 @@
 	overflow: hidden;
 }
 
-#signup-form .picture-wrapper:not(:has(img)) {
+#signup-form .picture-wrapper label {
+	font-size: 3em;
+	width:100%;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-#signup-form .picture-wrapper label {
-	font-size: 3em;
 }
 
 #signup-form .picture-wrapper label img {

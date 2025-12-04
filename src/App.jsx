@@ -4,6 +4,7 @@ import Main from "./pages/Main.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import MyPassions from "./pages/MyPassions.jsx";
+import Create from "./pages/Create.jsx";
 import "./css/App.css";
 import useUser from "./context/useUser.js";
 import LoggedProtectedRoute from "./components/LoggedProtectedRoute.jsx";
@@ -39,6 +40,14 @@ function App() {
 					element={
 						<UnloggedProtectedRoute user={user}>
 							<MyPassions />
+						</UnloggedProtectedRoute>
+					}
+				/>				
+				<Route
+					path="/create"
+					element={
+						<UnloggedProtectedRoute user={user}>
+							<Create />
 						</UnloggedProtectedRoute>
 					}
 				/>				

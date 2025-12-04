@@ -10,6 +10,9 @@
 	font-size: 15px;
 	background-color: #F1F7FB;
 	color: var(--primary-color-100);
+	font-family: "Caladea", serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 body {
@@ -59,7 +62,14 @@ a {
 .btn-wrapper {
 	position: relative;
 	display: inline-block;
-	height: 100%;
+	height: 3em;
+	min-height: 3em;
+	max-height: 3em;
+}
+
+.textarea-wrapper {
+	position: relative;
+	display: inline-block;
 }
 
 .inlineGroup-wrapper {
@@ -67,6 +77,7 @@ a {
 	height: 100%;
 	gap: 1em;
 	justify-content: center;
+	height: 3em;
 }
 
 /* Input */
@@ -112,6 +123,27 @@ a {
 	cursor: pointer;
 }
 
+.textarea-wrapper textarea {
+	background-color: transparent;
+	border: 1px solid var(--primary-color-10);
+	height: 100%;
+	width: 100%;
+	font-size: 1.2em;
+	padding: 0.5em;
+	box-sizing: border-box;
+	color: var(--primary-color-100);
+	border-radius: 0.3em;
+}
+
+input,
+select,
+textarea {
+	font-family: "Caladea", serif;
+	font-weight: 400;
+	font-style: normal;
+	color: var(--primary-color-100);
+}
+
 /* Chevrons FontAwesome */
 .select-wrapper .select-icon {
 	position: absolute;
@@ -144,7 +176,7 @@ input:-webkit-autofill:active {
 }
 
 .btn.filled,
-.select.filled {
+select.filled {
 	background-color: var(--primary-color-10);
 }
 
