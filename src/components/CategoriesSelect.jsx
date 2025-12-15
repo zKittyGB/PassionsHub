@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // Component to display a category select dropdown
-function CategoriesSelect({ selectedCategory, setSelectedCategory }) {
+function CategoriesSelect({ selectedCategory, setSelectedCategory, errors = [], setErrors, renderErrors = null }) {
 	// State to store fetched categories
 	const [categories, setCategories] = useState([]);
+	const location = useLocation();
 
 	// Fetch categories from backend on component mount
 	useEffect(() => {
@@ -22,15 +24,13 @@ function CategoriesSelect({ selectedCategory, setSelectedCategory }) {
 				className="filled"
 				value={selectedCategory}
 				onChange={(e) => {
-					// Update the selected category if setter exists
-					if (setSelectedCategory) {
-						setSelectedCategory(e.target.value);
-					}
+					setSelectedCategory(e.target.value);
+					setErrors(prev => ({ ...prev, selectedCategory: [] }));
 				}}
 			>
 				{/* Display 'Toutes les catégories' option conditionally */}
-				{setSelectedCategory && <option value="">Toutes les catégories</option>}
-				{!setSelectedCategory && <option value="" hidden>Toutes les catégories</option>}
+				{location.pathname !== "/create" && <option value="">Toutes les catégories</option>}
+				{location.pathname === "/create" && <option value="" hidden>Toutes les catégories</option>}
 
 				{/* Loop through category groups and items */}
 				{Object.entries(categories).map(([groupName, items]) => (
@@ -47,6 +47,7 @@ function CategoriesSelect({ selectedCategory, setSelectedCategory }) {
 
 			{/* Icon for custom dropdown */}
 			<i className="fa-solid fa-chevron-down select-icon"></i>
+			{renderErrors(errors.selectedCategory)}
 		</div>
 	);
 }

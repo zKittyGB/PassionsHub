@@ -1,16 +1,5 @@
-function PictureWrapper({ ID, picture, setPicture }) {
-
-	const handleChange = (e) => {
-		const file = e.target.files[0];
-		if (!file) return;
-
-		const newPictures = [...picture];
-		newPictures[ID] = file;
-
-		setPicture(newPictures);
-	};
-
-	const currentPicture = picture[ID];
+function PictureWrapper({ ID, pictures, setPictures, setErrors }) {
+	const currentPicture = pictures[ID];
 
 	return (
 		<div className="picture-wrapper">
@@ -19,7 +8,10 @@ function PictureWrapper({ ID, picture, setPicture }) {
 				id={`picture_${ID}`}
 				name={`picture_${ID}`}
 				accept="image/*"
-				onChange={handleChange}
+				onChange={(e) => {
+					setPictures(prev => ({ ...prev, [ID]: e.target.files[0] }));
+					setErrors(prev => ({ ...prev, pictures: [] }));
+				}}
 			/>
 
 			<label htmlFor={`picture_${ID}`}>

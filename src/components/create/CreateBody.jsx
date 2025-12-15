@@ -8,19 +8,79 @@ function CreateBody() {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState("");
-	const [picture, setPicture] = useState([]);
+	const [pictures, setPictures] = useState([]);
 	const [keywords, setKeywords] = useState("");
 	const [errors, setErrors] = useState({
 		title: [],
 		description: [],
-		category: [],
-		picture: []
+		selectedCategory: [],
+		pictures: [],
+		keywords: []
 	});
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log(title, description, selectedCategory, picture, keywords);
+		console.log("p",title, description, selectedCategory, pictures, keywords);
+
+		const newErrors = {
+			title: [],
+			description: [],
+			selectedCategory: [],
+			pictures: [],
+			keywords: []
+		};
+
+		// -----------------------------
+		// BASIC VALIDATIONS
+		// -----------------------------
+
+		// Required fields
+		if (!title.trim()) newErrors.title.push("Ce champ est obligatoire");
+		if (!description.trim()) newErrors.description.push("Ce champ est obligatoire");
+		if (!selectedCategory.trim()) newErrors.selectedCategory.push("Ce champ est obligatoire");
+		if (!keywords.trim()) newErrors.keywords.push("Ce champ est obligatoire");
+
+		if (pictures.length == 0) newErrors.pictures.push("Au moins une image est obligatoire");
+		if (pictures.length > 10) newErrors.pictures.push("Vous ne pouvez pas ajouter plus de 10 images");
+
+		// Check if there are any errors
+		const hasErrors = Object.values(newErrors).some((arr) => arr.length > 0);
+
+		if (hasErrors) {
+			setErrors(newErrors);
+			return;
+		}
+
+		// Prepare form data for submission
+		const formData = new FormData();
+		formData.append("selectedCategory", selectedCategory);
+		formData.append("title", title);
+		formData.append("description", description);
+		formData.append("keywords", keywords);
+		formData.append("pictures", pictures);
+
+		// Submit form data to backend
+		fetch("https://zkittygb.fr/projects/passionsHub/backend/create.php", {
+			method: "POST",
+			body: formData,
+		})
+			.then(res => res.json())
+			.then(data => {
+				if (data.success) {
+					console.log("data");
+				}
+			});
 	}
+               
+	// Utility to render error lists
+	const renderErrors = (arr) =>
+		arr?.length > 0 && (
+			<ul className="error-list">
+				{arr.map((err, i) => (
+					<li key={i} className="error-item">{err}</li>
+				))}
+			</ul>
+		);
 
 
 	return (
@@ -34,6 +94,9 @@ function CreateBody() {
 						<CategoriesSelect
 							selectedCategory={selectedCategory}
 							setSelectedCategory={setSelectedCategory}
+							errors={errors}
+							setErrors={setErrors}
+							renderErrors={renderErrors}
 						/>
 
 						{/* Input for passion title */}
@@ -43,8 +106,12 @@ function CreateBody() {
 								placeholder="Titre de la passion" 
 								id="title"
 								value={title}
-								onChange={(e) => setTitle(e.target.value)}
+								onChange={(e) => {
+									setTitle(e.target.value)
+									setErrors(prev => ({ ...prev, title: [] }));
+								}}
 							/>
+							{renderErrors(errors.title)}
 						</div>
 					</div>
 
@@ -54,8 +121,12 @@ function CreateBody() {
 							placeholder="Description de la passion"
 							id="description" 
 							value={description}
-							onChange={(e) => setDescription(e.target.value)}
+							onChange={(e) => {
+								setDescription(e.target.value)
+								setErrors(prev => ({ ...prev, description: [] }));
+							}}
 						/>
+						{renderErrors(errors.description)}
 					</div>
 
 					{/* Input for keywords */}
@@ -64,8 +135,12 @@ function CreateBody() {
 							placeholder="Mots clés (séparés par une virgule)"
 							id="keywords" 
 							value={keywords}
-							onChange={(e) => setKeywords(e.target.value)}
+							onChange={(e) => {
+								setKeywords(e.target.value)
+								setErrors(prev => ({ ...prev, keywords: [] }));
+							}}
 						/>
+						{renderErrors(errors.keywords)}
 					</div>
 
 					{/* Grid for picture uploads */}
@@ -75,10 +150,13 @@ function CreateBody() {
 							return <PictureWrapper 
 									key={i}
 									ID={i}
-									setPicture={setPicture}
-									picture={picture}
+									setPictures={setPictures}
+									pictures={pictures}
+									errors={errors}
+									setErrors={setErrors}
 								/>
 						})}
+						{renderErrors(errors.pictures)}
 					</div>
 
 					{/* Submit button */}

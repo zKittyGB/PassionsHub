@@ -57,9 +57,9 @@ a {
 }
 
 /* Wrappers */
-.input-wrapper,
-.select-wrapper,
-.btn-wrapper {
+.input-wrapper:not(:has(ul)),
+.select-wrapper:not(:has(ul)),
+.btn-wrapper:not(:has(ul)) {
 	position: relative;
 	display: inline-block;
 	height: 3em;
@@ -84,13 +84,16 @@ a {
 .input-wrapper input {
 	background-color: transparent;
 	border: 1px solid var(--primary-color-10);
-	height: 100%;
 	width: 100%;
 	font-size: 1.2em;
 	padding: 0.5em;
 	box-sizing: border-box;
 	color: var(--primary-color-100);
 	border-radius: 0.3em;
+}
+
+.input-wrapper:not(:has(ul)) input {
+	height: 100%;
 }
 
 /* Bouton */
@@ -111,7 +114,6 @@ a {
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	height: 100%;
 	width: 100%;
 	border: none;
 	background-color: transparent;
@@ -123,16 +125,24 @@ a {
 	cursor: pointer;
 }
 
+.select-wrapper:not(:has(ul)) select {
+	height: 100%;
+}
+
 .textarea-wrapper textarea {
 	background-color: transparent;
 	border: 1px solid var(--primary-color-10);
-	height: 100%;
 	width: 100%;
+	min-height: 90%;
 	font-size: 1.2em;
 	padding: 0.5em;
 	box-sizing: border-box;
 	color: var(--primary-color-100);
 	border-radius: 0.3em;
+}
+
+.textarea-wrapper:not(:has(ul)) textarea {
+	height: 100%;
 }
 
 input,
