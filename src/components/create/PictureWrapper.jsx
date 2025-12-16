@@ -9,7 +9,11 @@ function PictureWrapper({ ID, pictures, setPictures, setErrors }) {
 				name={`picture_${ID}`}
 				accept="image/*"
 				onChange={(e) => {
-					setPictures(prev => ({ ...prev, [ID]: e.target.files[0] }));
+					setPictures(prev => {
+						const copy = [...prev];
+						copy[ID] = e.target.files[0];
+						return copy.filter(Boolean);
+					});
 					setErrors(prev => ({ ...prev, pictures: [] }));
 				}}
 			/>

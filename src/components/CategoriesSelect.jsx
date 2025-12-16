@@ -21,6 +21,7 @@ function CategoriesSelect({ selectedCategory, setSelectedCategory, errors = [], 
 		<div className="select-wrapper">
 			{/* Select dropdown for categories */}
 			<select
+				id="categories"
 				className="filled"
 				value={selectedCategory}
 				onChange={(e) => {
@@ -36,7 +37,7 @@ function CategoriesSelect({ selectedCategory, setSelectedCategory, errors = [], 
 				{Object.entries(categories).map(([groupName, items]) => (
 					<optgroup label={groupName} key={groupName}>
 						{items.map((cat) => (
-							<option key={cat.ID} value={cat.name}>
+							<option key={cat.ID} value={cat.ID}>
 								{/* Display category name */}
 								{cat.name}
 							</option>
@@ -47,7 +48,7 @@ function CategoriesSelect({ selectedCategory, setSelectedCategory, errors = [], 
 
 			{/* Icon for custom dropdown */}
 			<i className="fa-solid fa-chevron-down select-icon"></i>
-			{renderErrors(errors.selectedCategory)}
+			{(renderErrors  && errors.selectedCategory) && renderErrors(errors.selectedCategory)}
 		</div>
 	);
 }

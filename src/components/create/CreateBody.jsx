@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../../css/Create.css";
 import PictureWrapper from "./PictureWrapper.jsx";
 import CategoriesSelect from "../CategoriesSelect.jsx";
+import useUser from "../../context/useUser.js";
 
 // Component to render the form for creating a new passion
 function CreateBody() {
@@ -10,6 +11,8 @@ function CreateBody() {
 	const [selectedCategory, setSelectedCategory] = useState("");
 	const [pictures, setPictures] = useState([]);
 	const [keywords, setKeywords] = useState("");
+	const [generalMessage, setGeneralMessage] = useState("");
+	const [generalMessageType, setGeneralMessageType] = useState(""); // "success" or "error"
 	const [errors, setErrors] = useState({
 		title: [],
 		description: [],
@@ -18,9 +21,11 @@ function CreateBody() {
 		keywords: []
 	});
 
+	// Access user context setter
+	const { user } = useUser();
+	
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log("p",title, description, selectedCategory, pictures, keywords);
 
 		const newErrors = {
 			title: [],
@@ -39,7 +44,7 @@ function CreateBody() {
 		if (!description.trim()) newErrors.description.push("Ce champ est obligatoire");
 		if (!selectedCategory.trim()) newErrors.selectedCategory.push("Ce champ est obligatoire");
 		if (!keywords.trim()) newErrors.keywords.push("Ce champ est obligatoire");
-
+		if (keywords.length > 500) newErrors.keywords.push("Le total des mots clés ne peut pas dépasser 500 caractères");
 		if (pictures.length == 0) newErrors.pictures.push("Au moins une image est obligatoire");
 		if (pictures.length > 10) newErrors.pictures.push("Vous ne pouvez pas ajouter plus de 10 images");
 
@@ -53,11 +58,15 @@ function CreateBody() {
 
 		// Prepare form data for submission
 		const formData = new FormData();
+		formData.append("userID", user.ID);
 		formData.append("selectedCategory", selectedCategory);
 		formData.append("title", title);
 		formData.append("description", description);
 		formData.append("keywords", keywords);
-		formData.append("pictures", pictures);
+
+		pictures.forEach((picture) => {
+			formData.append("pictures[]", picture);
+		});
 
 		// Submit form data to backend
 		fetch("https://zkittygb.fr/projects/passionsHub/backend/create.php", {
@@ -67,7 +76,37 @@ function CreateBody() {
 			.then(res => res.json())
 			.then(data => {
 				if (data.success) {
-					console.log("data");
+					// Display success message
+					setGeneralMessage(data.message);
+					setGeneralMessageType("success");
+					// Reset form fields
+					setTitle("");
+					setDescription("");
+					setSelectedCategory("");
+					setPictures([]);
+					setKeywords("");
+					setErrors({
+						title: [],
+						description: [],
+						selectedCategory: [],
+						pictures: [],
+						keywords: []
+					});
+				} else {
+					// Display general or field-specific errors from backend
+					if (data.errors.general) {
+						setGeneralMessage(data.errors.general[0]);
+						setGeneralMessageType("error");
+					} else {
+						setGeneralMessage("");
+					}
+					setErrors({
+						selectedCategory: data.errors.selectedCategory || [],
+						title: data.errors.title || [],
+						description: data.errors.description || [],
+						keywords: data.errors.keywords || [],
+						pictures: data.errors.pictures || []
+					});
 				}
 			});
 	}
@@ -88,6 +127,13 @@ function CreateBody() {
 			<div className="create">
 				{/* Form for creating a passion */}
 				<form id="create-form" onSubmit={handleSubmit}>
+					{/* General success or error message */}
+					{generalMessage && (
+						<div className={`general-message ${generalMessageType}`}>
+							{generalMessage}
+						</div>
+					)}
+
 					{/* Inline group: category select and title input */}
 					<div className="inlineGroup-wrapper">
 						{/* Category select dropdown */}
