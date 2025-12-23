@@ -1,18 +1,19 @@
-/* Container principal */
+/* Main container */
 .home-content {
-	display: block; /* par défaut block pour centrer le détail */
+	/* Default display block to center the detail view */
+	display: block;
 	gap: 1em;
 	height: 100%;
 }
 
-/* Grid uniquement si aucune carte détail n'est présente */
+/* Grid layout only if no detail card is present */
 .home-content:not(:has(.card-detail)) {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 	gap: 1em;
 }
 
-/* Cartes */
+/* Individual cards */
 .card {
 	width: 100%;
 	height: 22em;
@@ -29,6 +30,7 @@
 }
 
 .card.hidden {
+	/* Hide cards when needed */
 	opacity: 0;
 	pointer-events: none;
 }
@@ -71,7 +73,7 @@
 	box-sizing: border-box;	
 }
 
-/* Carte détail */
+/* Detail card container */
 .card-detail {
 	background-color: #fff;
 	border-radius: 0.5em;
@@ -86,7 +88,7 @@
 	animation: fadeIn 0.5s forwards;
 }
 
-/* Header détail avec image et croix */
+/* Detail header containing image and close icon */
 .card-detail-header {
 	position: relative;
 	width: 100%;
@@ -99,12 +101,13 @@
 	border-radius: 0.5em;
 }
 
+/* Description text alignment */
 .home p.card-detail-description {
 	width: 100%;
 	text-align: left;
 }
 
-/* Croix FontAwesome */
+/* FontAwesome close icon */
 .close-detail {
 	position: absolute;
 	top: 10px;
@@ -122,12 +125,12 @@
 	background: rgba(0,0,0,0.6);
 }
 
-/* Body du détail */
+/* Body section of the detail card */
 .card-detail-body {
 	padding-top: 1em;
 }
 
-/* Titre + catégorie + likes */
+/* Title, category, and likes layout */
 .card-detail-meta,
 .card-detail-title {
 	display: flex;
@@ -159,12 +162,13 @@
 	margin-bottom: 0;
 }
 
+/* Fade-in animation for detail card */
 @keyframes fadeIn {
 	from { opacity: 0; transform: translateY(20px); }
 	to { opacity: 1; transform: translateY(0); }
 }
 
-/* Message "aucune passion" */
+/* "No passions" message styling */
 .home-content p {
 	font-size: 1rem;
 	color: #555;

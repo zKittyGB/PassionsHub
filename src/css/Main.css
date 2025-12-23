@@ -1,6 +1,7 @@
 .main {
 	width: 100%;
-	min-height: calc(100vh - 14em); /* Header height 6em + 2*#body padding = 4em, so 6em + 2*4em = 14em */
+	/* Minimum height accounts for viewport height minus header and body padding */
+	min-height: calc(100vh - 14em); /* Header 6em + 2 * body padding 4em = 14em total */
 	display: flex;
 	padding: 1.5em;
 	box-sizing: border-box;

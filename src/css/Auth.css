@@ -1,7 +1,8 @@
 .main-auth {
+	/* Main authentication container */
 	width: 100%;
 	min-height: calc(100vh - 14em);
-	/* Header height 6em + 2*#body padding = 4em, so 6em + 2*4em = 14em */
+	/* Header height 6em + 2 * body padding 4em = 14em */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -12,6 +13,7 @@
 
 #login-form,
 #signup-form {
+	/* Login and signup forms */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -28,11 +30,13 @@
 }
 
 #signup-form {
+	/* Signup form wider layout */
 	max-width: 800px;
 }
 
 #signup-form .inlineGroup-wrapper,
 #signup-form .inlineGroup-wrapper div {
+	/* Ensure inline groups fill width */
 	width: 100%;
 }
 
@@ -40,14 +44,17 @@
 #login-form .btn-wrapper,
 #signup-form .input-wrapper:not(:has(ul)),
 #signup-form .btn-wrapper {
+	/* Standard height for input wrappers and buttons */
 	height: 3em;
 }
 
 .error-item {
+	/* Individual error text */
 	color: var(--error-color);
 }
 
 .general-message {
+	/* General feedback message container */
 	width: 100%;
 	border-radius: 0.5em;
 	padding: 1em;
@@ -58,14 +65,14 @@
 	font-weight: 500;
 }
 
-/* Message type error */
+/* Error message style */
 .general-message.error {
 	background-color: #ffe5e5;
 	color: var(--error-color);
 	border: 1px solid var(--error-color);
 }
 
-/* Message type success */
+/* Success message style */
 .general-message.success {
 	background-color: #e5ffe5;
 	color: var(--success-color);
@@ -73,6 +80,7 @@
 }
 
 #signup-form .picture-wrapper {
+	/* Circular profile picture container */
 	width: 8em;
 	height: 8em;
 	border: 1px solid var(--primary-color-10);
@@ -81,8 +89,9 @@
 }
 
 #signup-form .picture-wrapper label {
+	/* Label for file input (image icon / upload) */
 	font-size: 3em;
-	width:100%;
+	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -90,6 +99,7 @@
 }
 
 #signup-form .picture-wrapper label img {
+	/* Profile picture image */
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -97,5 +107,6 @@
 }
 
 #signup-form input[type="file"] {
+	/* Hide default file input */
 	display: none;
 }

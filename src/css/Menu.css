@@ -1,26 +1,32 @@
 .main-menu {
+	/* Sidebar width */
 	width: 15%;
 }
 
 .main-menu ul {
+	/* Vertical list layout with spacing between items */
 	display: flex;
 	flex-direction: column;
 	gap: 0.5em;
 }
 
 .main-menu li {
+	/* Fixed height for each menu item */
 	height: 3em;
 }
 
 .main-menu .btn-wrapper {
+	/* Make wrapper full width */
 	width: 100%;
 }
 
 .main-menu .btn-wrapper .btn {
+	/* Align text to the left inside buttons */
 	text-align: left;
 }
 
 .main-menu button.active {
+	/* Active button styling */
 	background-color: var(--primary-color-10);
 	font-weight: bold;
 }

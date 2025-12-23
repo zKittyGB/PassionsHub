@@ -1,10 +1,13 @@
 :root {
+	/* Color variables */
 	--primary-color-100: #3C424B;
 	--primary-color-30: #3c424b5d;
 	--primary-color-20: #3c424b44;
 	--primary-color-10: #3c424b21;
 	--error-color: #ff0000;
 	--success-color: #2e7d32;
+
+	/* Global resets and font settings */
 	padding: 0;
 	margin: 0;
 	font-size: 15px;
@@ -16,6 +19,7 @@
 }
 
 body {
+	/* Body layout */
 	margin: 0;
 	padding: 4em;
 	box-sizing: border-box;
@@ -27,6 +31,7 @@ body {
 }
 
 #root {
+	/* Main container */
 	width: 100%;
 	background-color: white;
 	border-radius: 1em;
@@ -40,23 +45,26 @@ h3,
 h4,
 h5,
 h6 {
+	/* Reset headings */
 	margin: 0;
 	padding: 0;
 }
 
 ul,
 li {
+	/* Reset lists */
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
 a {
+	/* Links */
 	text-decoration: none;
 	color: inherit;
 }
 
-/* Wrappers */
+/* Wrappers for inputs, selects, and buttons */
 .input-wrapper:not(:has(ul)),
 .select-wrapper:not(:has(ul)),
 .btn-wrapper:not(:has(ul)) {
@@ -68,19 +76,20 @@ a {
 }
 
 .textarea-wrapper {
+	/* Textarea wrapper */
 	position: relative;
 	display: inline-block;
 }
 
 .inlineGroup-wrapper {
+	/* Inline grouped elements */
 	display: flex;
-	height: 100%;
 	gap: 1em;
 	justify-content: center;
 	height: 3em;
 }
 
-/* Input */
+/* Input fields */
 .input-wrapper input {
 	background-color: transparent;
 	border: 1px solid var(--primary-color-10);
@@ -96,7 +105,7 @@ a {
 	height: 100%;
 }
 
-/* Bouton */
+/* Buttons */
 .btn-wrapper .btn {
 	height: 100%;
 	width: 100%;
@@ -109,7 +118,7 @@ a {
 	color: var(--primary-color-100);
 }
 
-/* Select */
+/* Select elements */
 .select-wrapper select {
 	appearance: none;
 	-webkit-appearance: none;
@@ -129,6 +138,7 @@ a {
 	height: 100%;
 }
 
+/* Textarea fields */
 .textarea-wrapper textarea {
 	background-color: transparent;
 	border: 1px solid var(--primary-color-10);
@@ -145,6 +155,7 @@ a {
 	height: 100%;
 }
 
+/* Global input, select, and textarea font settings */
 input,
 select,
 textarea {
@@ -154,7 +165,7 @@ textarea {
 	color: var(--primary-color-100);
 }
 
-/* Chevrons FontAwesome */
+/* FontAwesome chevron icons for select */
 .select-wrapper .select-icon {
 	position: absolute;
 	right: 10px;
@@ -164,17 +175,19 @@ textarea {
 	font-size: 0.8em;
 }
 
+/* Button wrapper adjustments */
 .btn-wrapper .btn {
 	height: 100%;
 }
 
-/* Focus */
+/* Focus states */
 .input-wrapper input:focus,
 .select-wrapper select:focus {
 	outline: none;
 	border-color: var(--primary-color-10);
 }
 
+/* Autofill overrides for inputs */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -182,18 +195,20 @@ input:-webkit-autofill:active {
 	-webkit-box-shadow: 0 0 0px 1000px white inset !important;
 	-webkit-text-fill-color: var(--primary-color-100) !important;
 	background-clip: padding-box !important;
-
 }
 
+/* Filled buttons and selects */
 .btn.filled,
 select.filled {
 	background-color: var(--primary-color-10);
 }
 
+/* Button hover effect */
 .btn:hover {
 	background-color: var(--primary-color-30);
 }
 
+/* Utility hidden class */
 .hidden {
 	display: none;
 }

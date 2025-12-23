@@ -1,15 +1,21 @@
 :root {
+	/* Font family and general text styling */
 	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
 
+	/* Color scheme for light and dark modes */
 	color-scheme: light dark;
+
+	/* Default text color and background color */
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
 
+	/* Disable font synthesis for consistent weight */
 	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
 
+	/* Improve text rendering */
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased; /* For WebKit browsers */
+	-moz-osx-font-smoothing: grayscale;  /* For Firefox on macOS */
+}

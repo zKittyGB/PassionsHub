@@ -1,4 +1,5 @@
 .create {
+	/* Main container for create page */
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -9,6 +10,7 @@
 }
 
 .create form {
+	/* Form layout */
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -18,24 +20,29 @@
 }
 
 .create form .select-wrapper {
+	/* Select field container */
 	width: 15%;
 }
 
 .create form .input-wrapper {
+	/* Input field container */
 	flex: 1;
 }
 
 .create form .textarea-wrapper {
+	/* Textarea container takes full height */
 	height: 100%;
 }
 
 .create form .grid-wrapper {
+	/* Grid layout for multiple items (e.g., categories or tags) */
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	gap: 1em;
 }
 
 .create form .grid-wrapper div {
+	/* Individual grid items */
 	background-color: var(--primary-color-10);
 	color: var(--primary-color-100);
 	font-size: 1.2em;
@@ -46,14 +53,17 @@
 }
 
 .create form .grid-wrapper div:hover {
+	/* Hover effect for grid items */
 	transform: scale(1.02);
 }
 
 .create form .picture-wrapper i {
+	/* Icon inside picture upload */
 	font-size: 1.2em;
 }
 
 .create form .picture-wrapper label {
+	/* Label for picture upload, acts as clickable area */
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -63,11 +73,13 @@
 }
 
 .create form .picture-wrapper label img {
+	/* Display uploaded picture */
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
 
 .create form .picture-wrapper input[type="file"] {
+	/* Hide default file input */
 	display: none;
 }
