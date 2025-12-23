@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../css/HomeContent.css";
 
 // Component to render a single card
@@ -47,6 +47,18 @@ function HomeContent({ passions }) {
 	const handleBack = () => {
 		setSelectedPassion(null);
 	};
+
+	// Close detail view when pressing Escape key
+	useEffect(() => {
+		const handleKeyDown = (e) => {
+			if (e.key === "Escape" && selectedPassion) {
+				handleBack();
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [selectedPassion]);
 
 	return (
 		<div className="home-content">
