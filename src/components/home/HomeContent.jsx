@@ -1,45 +1,74 @@
+import { useState } from "react";
 import "../../css/HomeContent.css";
 
-// Component to display individual cards
-function Cards(props) {
+function Cards({ passion, onClick }) {
 	return (
-		<div className={`card ${props.passion.hidden ? "hidden" : ""}`}>
-			{/* Card header displaying the cover image */}
+		<div
+			className={`card ${passion.hidden ? "hidden" : ""}`}
+			onClick={onClick} // ajout de l'event
+			style={{ cursor: "pointer" }}
+		>
 			<div className="card-header">
-				<img src={"../../pictures/" + props.passion.cover_picture} alt={props.passion.title} />
+				<img src={"../../pictures/" + passion.cover_picture} alt={passion.title} />
 			</div>
-
-			{/* Card main content including title, description and meta info */}
 			<div className="card-content">
-				<h2>{props.passion.title}</h2>
-				<p>{props.passion.description}</p>
-
-				{/* Wrapper for category and likes */}
+				<h2>{passion.title}</h2>
+				<p>{passion.description}</p>
 				<div className="card-meta-wrapper">
-					<span className="card-category">{props.passion.category}</span>
-					<span className="card-likes"><i className="fa-solid fa-thumbs-up"></i> {props.passion.likes}</span>
+					<span className="card-category">{passion.category}</span>
+					<span className="card-likes"><i className="fa-solid fa-thumbs-up"></i> {passion.likes}</span>
 				</div>
-
-				{/* Display the author of the passion */}
-				<p>par {props.passion.author.username}</p>
+				<p>par {passion.author.username}</p>
 			</div>
 		</div>
 	);
 }
 
-// Component to display the list of passions
-function HomeContent(props) {
+function HomeContent({ passions }) {
+	const [selectedPassion, setSelectedPassion] = useState(null);
+
+	const handleCardClick = (passion) => {
+		setSelectedPassion(passion); // on sélectionne la carte cliquée
+	};
+
+	const handleBack = () => {
+		setSelectedPassion(null); // revenir à l'affichage des cartes
+	};
+
 	return (
 		<div className="home-content">
-			{/* Check if passions array exists and has items */}
-			{Array.isArray(props.passions) && props.passions.length > 0 ? (
-				// Map through each passion and display a card
-				props.passions.map((passion) => (
-					<Cards key={passion.id} passion={passion} />
-				))
+			{selectedPassion ? (
+				<div className="card-detail">
+					<div className="card-detail-header">
+						<img src={"../../pictures/" + selectedPassion.cover_picture} alt={selectedPassion.title} />
+						<i className="fa-solid fa-xmark close-detail" onClick={handleBack}></i>
+					</div>
+					<div className="card-detail-body">
+						<div className="card-detail-title">
+							<h2>{selectedPassion.title}</h2>
+							<span className="card-likes"><i className="fa-solid fa-thumbs-up"></i> {selectedPassion.likes}</span>
+						</div>
+
+						<div className="card-detail-meta">
+							<span className="card-category">{selectedPassion.category}</span>
+						</div>
+						<p className="card-detail-description">{selectedPassion.description}</p>
+
+						<p>par {selectedPassion.author.username}</p>
+					</div>
+				</div>
 			) : (
-				// Message when no passions are available
-				<p>Aucune passion à afficher</p>
+				passions.length > 0 ? (
+					passions.map((passion) => (
+						<Cards
+							key={passion.id}
+							passion={passion}
+							onClick={() => handleCardClick(passion)}
+						/>
+					))
+				) : (
+					<p>Aucune passion à afficher</p>
+				)
 			)}
 		</div>
 	);
