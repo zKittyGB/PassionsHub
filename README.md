@@ -39,7 +39,7 @@ This project is built with **React + Vite** and focuses on clean UI, reusable co
 - **Axios / Fetch API**
 - **Custom CSS (no Tailwind, no UI framework)**
 
-### Backend *(planned)*
+### Backend
 The backend will provide:
 - Authentication system  
 - CRUD operations for users, posts, and comments  
