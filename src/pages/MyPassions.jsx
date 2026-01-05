@@ -1,18 +1,33 @@
-import "../css/Main.css";
+import { useState, useEffect } from "react";
+import useUser from "../context/useUser.js";
 import Menu from "../components/Menu.jsx";
+import MyPassionsBody from "../components/MyPassionsBody.jsx";
 
-// Page component to display the user's passions
 function MyPassions() {
-	return (
-		<>
-			<div className="main">
-				{/* Main navigation menu with 'myPassions' selected */}
-				<Menu selected="myPassions" />
+	const { user } = useUser();
+	const [passions, setPassions] = useState([]);
 
-				{/* Content for user's passions can be added here */}
-			</div>
-		</>
-	)
+	useEffect(() => {
+		if (!user?.ID) return;
+
+		const formData = new FormData();
+		formData.append("userID", user.ID);
+
+		fetch("https://zkittygb.fr/projects/passionsHub/backend/getMyPassions.php", {
+			method: "POST",
+			body: formData,
+		})
+			.then(res => res.json())
+			.then(data => setPassions(data))
+			.catch(err => console.error("Erreur fetching passions:", err));
+	}, [user]);
+
+	return (
+		<div className="main">
+			<Menu selected="myPassions" />
+			<MyPassionsBody passions={passions} />
+		</div>
+	);
 }
 
 export default MyPassions;
