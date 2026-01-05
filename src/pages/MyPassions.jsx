@@ -25,7 +25,7 @@ function MyPassions() {
 	return (
 		<div className="main">
 			<Menu selected="myPassions" />
-			<MyPassionsBody passions={passions} />
+			<MyPassionsBody myPassions={passions} />
 		</div>
 	);
 }

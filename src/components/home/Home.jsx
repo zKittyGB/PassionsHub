@@ -1,7 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../css/Home.css";
-import passionsData from "../../data/passions.json";
-import usersData from "../../data/users.json";
 import HomeContent from "./HomeContent.jsx";
 import useUser from "../../context/useUser.js";
 import CategoriesSelect from "../CategoriesSelect.jsx";
@@ -12,33 +10,52 @@ function Home() {
 	const [searchTerm, setSearchTerm] = useState("");
 	// State for selected category
 	const [selectedCategory, setSelectedCategory] = useState("");
+	// State for all passions
+	const [passions, setPassions] = useState([]);
 	// Access current user from context
 	const { user } = useUser();
 
-	// Merge passions data with author info
-	const passionsWithAuthors = passionsData.map((passion) => {
-		const author = usersData.find((user) => user.id === passion.author_id);
-		return {
-			...passion,
-			author: author || null,
-		};
-	});
+	// Fetch passions from backend
+	useEffect(() => {
+		const formData = new FormData();
+		formData.append("userID", 0);
+
+		fetch("https://zkittygb.fr/projects/passionsHub/backend/getPassions.php", {
+			method: "POST",
+			body: formData,
+		})
+			.then(res => res.json())
+			.then(data => {
+				// Make sure data is an array before setting state
+				if (Array.isArray(data)) {
+					setPassions(data);
+				} else {
+					setPassions([]);
+					console.error("Les données reçues ne sont pas un tableau :", data);
+				}
+			})
+			.catch(err => console.error("Erreur fetching passions:", err));
+	}, [user]);
 
 	// Filter passions based on search term and selected category
-	const filteredPassions = passionsWithAuthors.map((passion) => {
+	const filteredPassions = passions.map((passion) => {
 		const term = searchTerm.toLowerCase();
+
+		// Ensure keywords and category exist
+		const keywords = passion.keywords || [];
+		const category = passion.categoryName || passion.category || "";
 
 		// Check if passion matches search term
 		const matchesSearch =
 			term === "" ||
 			passion.title.toLowerCase().includes(term) ||
-			passion.category.toLowerCase().includes(term) ||
-			passion.tags.some((tag) => tag.toLowerCase().includes(term));
+			category.toLowerCase().includes(term) ||
+			keywords.some((tag) => tag.toLowerCase().includes(term));
 
 		// Check if passion matches selected category
 		const matchesCategory =
 			selectedCategory === "" ||
-			passion.category.toLowerCase() === selectedCategory.toLowerCase();
+			category.toLowerCase() === selectedCategory.toLowerCase();
 
 		// Add hidden flag if it doesn't match search or category
 		return {
