@@ -26,7 +26,9 @@ function CategoriesSelect({ selectedCategory, setSelectedCategory, errors = [], 
 				value={selectedCategory}
 				onChange={(e) => {
 					setSelectedCategory(e.target.value);
-					setErrors(prev => ({ ...prev, selectedCategory: [] }));
+					if (setErrors) {
+						setErrors(prev => ({ ...prev, selectedCategory: [] }));
+					}
 				}}
 			>
 				{/* Display 'Toutes les catégories' option conditionally */}

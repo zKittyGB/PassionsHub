@@ -43,7 +43,8 @@ function Home() {
 
 		// Ensure keywords and category exist
 		const keywords = passion.keywords || [];
-		const category = passion.categoryName || passion.category || "";
+		const category = passion.categoryName || "";
+		const categoryID = passion.categoryID || "";
 
 		// Check if passion matches search term
 		const matchesSearch =
@@ -55,7 +56,7 @@ function Home() {
 		// Check if passion matches selected category
 		const matchesCategory =
 			selectedCategory === "" ||
-			category.toLowerCase() === selectedCategory.toLowerCase();
+			categoryID === parseInt(selectedCategory);
 
 		// Add hidden flag if it doesn't match search or category
 		return {
