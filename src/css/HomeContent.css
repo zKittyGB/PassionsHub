@@ -1,5 +1,5 @@
 /* Main container */
-.home-content {
+.home-content .passions-view {
 	/* Default display block to center the detail view */
 	display: block;
 	gap: 1em;
@@ -7,159 +7,10 @@
 }
 
 /* Grid layout only if no detail card is present */
-.home-content:not(:has(.card-detail)) {
+.home-content .passions-view:not(:has(.card-detail)) {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 	gap: 1em;
-}
-
-/* Individual cards */
-.card {
-	width: 100%;
-	height: 22em;
-	border-radius: 0.5em;
-	border: 1px solid var(--primary-color-10);
-	overflow: hidden;
-	cursor: pointer;
-	transition: transform 0.3s ease, opacity 0.3s ease;
-	background-color: #fff;
-}
-
-.card:hover {
-	transform: translateY(-5px);
-}
-
-.card.hidden {
-	/* Hide cards when needed */
-	opacity: 0;
-	pointer-events: none;
-}
-
-.card-header {
-	height: 12em;
-	overflow: hidden;
-}
-
-.card-header img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.card-content {
-	width: 100%;
-	height: calc(100% - 12em);
-	padding: 0.5em;
-	box-sizing: border-box;
-}
-
-.card-content p,
-.card-content span {
-	font-weight: 600;
-	margin: 5px 0;
-}
-
-.card-meta-wrapper {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 0.5em;
-}
-
-.card-meta-wrapper .card-category {
-	background-color: var(--primary-color-10);
-	border-radius: 0.3em;
-	padding: 0.3em 0.5em;
-	box-sizing: border-box;	
-}
-
-/* Detail card container */
-.card-detail {
-	background-color: #fff;
-	border-radius: 0.5em;
-	border: 1px solid var(--primary-color-10);
-	width: 100%;
-	height: 100%;
-	padding: 1em;
-	box-sizing: border-box;
-	text-align: center;
-	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-	opacity: 0;
-	animation: fadeIn 0.5s forwards;
-}
-
-/* Detail header containing image and close icon */
-.card-detail-header {
-	position: relative;
-	width: 100%;
-}
-
-.card-detail-header img {
-	width: 100%;
-	max-height: 300px;
-	object-fit: cover;
-	border-radius: 0.5em;
-}
-
-/* Description text alignment */
-.home p.card-detail-description {
-	width: 100%;
-	text-align: left;
-}
-
-/* FontAwesome close icon */
-.close-detail {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	font-size: 1.5rem;
-	color: #fff;
-	cursor: pointer;
-	background: rgba(0,0,0,0.3);
-	border-radius: 50%;
-	padding: 0.2em 0.3em;
-	transition: background 0.2s;
-}
-
-.close-detail:hover {
-	background: rgba(0,0,0,0.6);
-}
-
-/* Body section of the detail card */
-.card-detail-body {
-	padding-top: 1em;
-}
-
-/* Title, category, and likes layout */
-.card-detail-meta,
-.card-detail-title {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 1em;
-}
-
-.card-detail-meta .card-category {
-	background-color: var(--primary-color-10);
-	border-radius: 0.3em;
-	padding: 0.3em 0.5em;
-}
-
-.card-detail-meta .card-likes {
-	font-weight: 600;
-	display: flex;
-	align-items: center;
-	gap: 0.3em;
-}
-
-.card-detail p {
-	margin-bottom: 1em;
-	color: #333;
-	font-weight: 600;
-}
-
-.card-detail p:last-child {
-	margin-bottom: 0;
 }
 
 /* Fade-in animation for detail card */

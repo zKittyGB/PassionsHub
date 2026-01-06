@@ -1,4 +1,4 @@
-import "../css/HomeContent.css";
+import "../css/card.css";
 
 // Component to render a single card
 function Cards({ passion, onClick }) {
