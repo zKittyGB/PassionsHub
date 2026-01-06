@@ -187,3 +187,10 @@ p.card-detail-description {
 		opacity: 0;
 	}
 }
+
+.card-details-author {
+	position: fixed;
+	bottom: 0.2em;
+	left: 50%;
+	transform: translateX(-50%);
+}

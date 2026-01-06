@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Cards from "./Cards.jsx";
 import "../css/MyPassions.css";
 
 function PassionsView({ items }) {
 	const [selectedPassion, setSelectedPassion] = useState(null);
+	const detailRef = useRef(null);
 
 	const handleCardClick = (passion) => setSelectedPassion(passion);
 	const handleBack = () => setSelectedPassion(null);
@@ -17,12 +18,23 @@ function PassionsView({ items }) {
 		return () => window.removeEventListener("keydown", handleKeyDown);
 	}, [selectedPassion]);
 
+	useEffect(() => {
+		const handleClickOutside = (e) => {
+			if (selectedPassion && detailRef.current && !detailRef.current.contains(e.target)) {
+				handleBack();
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, [selectedPassion]);
+
 	return (
 		<div className="passions-view">
 			{console.log(selectedPassion)}
 
 			{selectedPassion ? (
-				<div className="card-detail">
+				<div className="card-detail" ref={detailRef}>
 					<div className="card-detail-header">
 						<img
 							src={`https://zkittygb.fr/projects/passionsHub/public/pictures/hobbies/${selectedPassion.cover_picture}`}
@@ -57,8 +69,8 @@ function PassionsView({ items }) {
 								))}
 							</div>
 						)}
-						
-						<p>by {selectedPassion.author.username}</p>
+
+						<p className="card-details-author">by {selectedPassion.author.username}</p>
 					</div>
 				</div>
 			) : (
