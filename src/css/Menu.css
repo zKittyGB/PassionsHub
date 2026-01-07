@@ -30,3 +30,24 @@
 	background-color: var(--primary-color-10);
 	font-weight: bold;
 }
+
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+	.main-menu .btn-wrapper .btn {
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 992px) {
+	.main-menu .btn-wrapper .btn {
+		font-size: 0.8rem;
+	}
+}
+
+/* Hide sidebar on small screens */
+@media (max-width: 768px) {
+    .main-menu {
+        display: none;
+    }
+}

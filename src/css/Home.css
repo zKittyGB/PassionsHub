@@ -29,6 +29,11 @@
 	flex: 1;
 }
 
+.home-header .btn-wrapper button.active { 
+	background-color: #186d86;
+	color: white;
+}
+
 .home-content {
 	/* Main content area inside home */
 	width: 100%;

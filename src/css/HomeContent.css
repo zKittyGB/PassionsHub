@@ -25,3 +25,20 @@
 	color: #555;
 	text-align: center;
 }
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+	.home-header .btn-wrapper .btn,
+	.home-header .select-wrapper select,
+	.home-header .input-wrapper input {
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 992px) {
+	.home-header .btn-wrapper .btn,
+	.home-header .select-wrapper select,
+	.home-header .input-wrapper input {
+		font-size: 0.8rem;
+	}
+}

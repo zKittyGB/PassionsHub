@@ -46,17 +46,6 @@ function Menu(props) {
 									</div>
 								</li>
 							</Link>
-
-							{/* Link to Profile */}
-							<Link to="/profile">
-								<li>
-									<div className="btn-wrapper">
-										<button className={`btn ${props.selected === 'profile' ? 'active' : ''}`}>
-											Mon profil
-										</button>
-									</div>
-								</li>
-							</Link>
 						</>
 					)}
 

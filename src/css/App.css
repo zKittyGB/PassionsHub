@@ -212,3 +212,10 @@ select.filled {
 .hidden {
 	display: none;
 }
+
+/* Responsive: smaller screens */
+@media (max-width: 768px) {
+	body {
+		padding: 0;
+	}
+}

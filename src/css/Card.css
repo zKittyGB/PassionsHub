@@ -145,6 +145,19 @@ p.card-detail-description {
 	gap: 0.3em;
 }
 
+.card-likes:hover {
+	color: #186d86;
+	cursor: pointer;
+}
+
+.card-likes.liked {
+	color: #186d86;
+}
+
+.card-likes.liked:hover {
+	color: #333;
+}
+
 .card-detail p {
 	margin-bottom: 1em;
 	color: #333;
@@ -163,26 +176,38 @@ p.card-detail-description {
 	overflow: hidden;
 	border-radius: 0.5em;
 	margin-bottom: 1em;
+	background-color: #333;
 }
 
 .card-lightbox img {
 	position: absolute;
-	width: 100%;
-	height: 100%;
+	border-radius: 0.5em;
+	max-width: 100%;
+	max-height: 100%;
 	object-fit: cover;
-	top: 0;
-	left: 0;
+	object-position: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	opacity: 0;
-	animation: fadeLightbox 15s linear infinite;
+	animation-name: fadeLightbox;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
 }
 
 @keyframes fadeLightbox {
-	0%,
-	33% {
+	0% {
+		opacity: 0;
+	}
+	10% {
 		opacity: 1;
 	}
-
-	33.01%,
+	45% {
+		opacity: 1;
+	}
+	55% {
+		opacity: 0;
+	}
 	100% {
 		opacity: 0;
 	}
@@ -193,4 +218,11 @@ p.card-detail-description {
 	bottom: 0.2em;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+	.card-lightbox {
+		height:500px;
+	}
 }
