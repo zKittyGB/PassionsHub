@@ -14,7 +14,7 @@ function App() {
 	const { user } = useUser();
 
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename="/projects/passionsHub">
 			<Header />
 			<Routes>
 

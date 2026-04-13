@@ -11,22 +11,21 @@ This project is built with **React + Vite** and focuses on clean UI, reusable co
 
 ### 🔐 Authentication  
 - User registration and login  
-- Session handling (planned)
+- Session handling
 
 ### 📝 Hobby Posts  
 - Create, edit, and delete your own hobby posts  
 - Add category, description, tags, and images  
 - Display hobby cards in a responsive layout  
-- Like and comment system *(planned)*
+- Like system
 
 ### 🔎 Search & Filtering  
 - Search posts by keywords  
 - Filter by category  
-- Optional sorting by date or popularity *(planned)*
+- Filter by likes
 
 ### 👤 User Profiles  
 - Public profile pages with user-specific posts  
-- Editable profile information *(planned)*
 
 ---
 
@@ -42,7 +41,7 @@ This project is built with **React + Vite** and focuses on clean UI, reusable co
 ### Backend
 The backend will provide:
 - Authentication system  
-- CRUD operations for users, posts, and comments  
+- CRUD operations for users and posts
 - Image upload support  
 
 It will be implemented in **PHP + MySQL**.
